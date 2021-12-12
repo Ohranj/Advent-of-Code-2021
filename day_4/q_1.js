@@ -77,9 +77,7 @@ function checkColumnWon(grid, bingoBall) {
 
 function getUnmarkedSum() {
 	return winningGrid.reduce((acc, c) => {
-		if (Number(c)) {
-			acc += Number(c);
-		}
+		if (Number(c)) acc += Number(c);
 		return acc;
 	}, 0);
 }
