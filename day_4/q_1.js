@@ -62,7 +62,7 @@ function checkColumnWon(grid, bingoBall) {
 	do {
 		let column = [];
 		for (let j = 0; j < gridLength; j += 5) {
-			column.push(grid[j]);
+			column = [...column, grid[j]];
 		}
 		const columnWon = column.every((x) => x == "*");
 		if (columnWon) {
