@@ -45,4 +45,3 @@ const plots = inputs
 	.filter((x) => x >= 2).length;
 
 console.log(plots);
-///fuirfghrui/freiojre
