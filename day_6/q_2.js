@@ -13,23 +13,22 @@ const lanternFish = [
 	1, 3, 4, 1, 1, 4, 1, 1, 2, 4, 4, 1, 1, 3, 1, 3, 2, 2, 1, 2, 5, 3, 3, 1, 1,
 ];
 
-let myBuckets = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-
-//Sort initial fish into their bucket, dependant on day in cycle
-for (let i = 0; i < lanternFish.length; i++) {
-	myBuckets[lanternFish[i]]++;
-}
+//Sort initial fish into their bucket, dependant on day in cycle.
+const buckets = lanternFish.reduce((acc, c) => {
+	acc[c]++;
+	return acc;
+}, Array(9).fill(0));
 
 //Refresh the buckets and add the baby Laternfish to bucket 8
 let day = 0;
 
 while (day < 256) {
-	let zeroBucket = myBuckets.shift();
-	myBuckets[6] += zeroBucket;
-	myBuckets[8] = zeroBucket;
+	const zeroBucket = buckets.shift();
+	buckets[6] += zeroBucket;
+	buckets[8] = zeroBucket;
 	day++;
 }
 
 //Sum the total number of Lanternfish in my buckets
-const totalFish = myBuckets.reduce((acc, c) => (acc += c), 0);
+const totalFish = buckets.reduce((acc, c) => (acc += c), 0);
 console.log(totalFish);
