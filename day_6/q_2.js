@@ -17,8 +17,7 @@ let myBuckets = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 //Sort initial fish into their bucket, dependant on day in cycle
 for (let i = 0; i < lanternFish.length; i++) {
-	const val = lanternFish[i];
-	myBuckets[val]++;
+	myBuckets[lanternFish[i]]++;
 }
 
 //Refresh the buckets and add the baby Laternfish to bucket 8
