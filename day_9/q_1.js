@@ -4,7 +4,7 @@ const data =
 		.join("")
 		.split("");
 
-let lowPoints = [];
+let lowPoints = 0;
 
 const checkLeft = (k, points) => points[k] < points[k - 1] || !points[k - 1];
 
@@ -27,9 +27,8 @@ for (let i = 0; i < data.length; i += 100) {
 		if (!checkRight(k, points)) continue;
 		if (!checkBelow(k, points, i)) continue;
 		if (!checkAbove(k, points, i)) continue;
-		lowPoints.push(Number(points[k]));
+		lowPoints += Number(points[k]) + 1;
 	}
 }
 
-const riskLevel = lowPoints.reduce((acc, c) => (acc += c += 1), 0);
-console.log(riskLevel);
+console.log(lowPoints);
