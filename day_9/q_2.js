@@ -40,20 +40,20 @@ const getBelow = (cur) => {
 };
 
 const getLeft = (cur) => {
-	getAbove(cur);
-	getBelow(cur);
 	cur--;
 	if (cur % 10 == 0 || data[cur] == 9) return;
 	subBasin.push(data[cur]);
+	getAbove(cur);
+	getBelow(cur);
 	getLeft(cur);
 };
 
 const getRight = (cur) => {
-	getAbove(cur);
-	getBelow(cur);
 	cur++;
 	if (cur % 10 == 0 || data[cur] == 9) return;
 	subBasin.push(data[cur]);
+	getAbove(cur);
+	getBelow(cur);
 	getRight(cur);
 };
 
@@ -69,6 +69,8 @@ for (let i = 0; i < data.length; i += 10) {
 
 		subBasin.push(data[currentPosition]);
 
+		getAbove(currentPosition);
+		getBelow(currentPosition);
 		getLeft(currentPosition);
 		getRight(currentPosition);
 
