@@ -9,12 +9,12 @@ const checkLeft = (k, points) => points[k] < points[k - 1] || !points[k - 1];
 const checkRight = (k, points) => points[k] < points[k + 1] || !points[k + 1];
 
 const checkBelow = (k, points, i) => {
-	const pointBelow = i - 100 + k;
+	const pointBelow = i - 10 + k;
 	return points[k] < data[pointBelow] || !data[pointBelow];
 };
 
 const checkAbove = (k, points, i) => {
-	const pointAbove = i + 100 + k;
+	const pointAbove = i + 10 + k;
 	return points[k] < data[pointAbove] || !data[pointAbove];
 };
 
@@ -22,24 +22,24 @@ let basins = [];
 let subBasin = [];
 
 const getAbove = (cur) => {
-	cur -= 100;
-	while (data[cur] < 9) {
+	cur -= 10;
+	while (data[cur] < 9 && cur < data.length) {
 		subBasin.push(data[cur]);
-		cur -= 100;
+		cur -= 10;
 	}
 };
 
 const getBelow = (cur) => {
-	cur += 100;
-	while (data[cur] < 9) {
+	cur += 10;
+	while (data[cur] < 9 && cur < data.length) {
 		subBasin.push(data[cur]);
-		cur += 100;
+		cur += 10;
 	}
 };
 
 const getLeft = (cur) => {
 	cur--;
-	if (cur % 100 == 0 || data[cur] == 9) return;
+	if (cur % 10 == 0 || data[cur] == 9) return;
 	subBasin.push(data[cur]);
 	getAbove(cur);
 	getBelow(cur);
@@ -48,16 +48,16 @@ const getLeft = (cur) => {
 
 const getRight = (cur) => {
 	cur++;
-	if (cur % 100 == 0 || data[cur] == 9) return;
+	if (cur % 10 == 0 || data[cur] == 9) return;
 	subBasin.push(data[cur]);
 	getAbove(cur);
 	getBelow(cur);
 	getRight(cur);
 };
 
-for (let i = 0; i < data.length; i += 100) {
-	const points = data.slice(i, i + 100);
-	for (let k = 0; k < 100; k++) {
+for (let i = 0; i < data.length; i += 10) {
+	const points = data.slice(i, i + 10);
+	for (let k = 0; k < 10; k++) {
 		if (!checkLeft(k, points)) continue;
 		if (!checkRight(k, points)) continue;
 		if (!checkBelow(k, points, i)) continue;
@@ -81,6 +81,8 @@ for (let i = 0; i < data.length; i += 100) {
 		subBasin = [];
 	}
 }
+
+console.log(basins);
 
 const sum = basins.reduce((acc, c) => (acc *= c.length), 1);
 console.log(sum);
